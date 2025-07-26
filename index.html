@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Didik Wahyu Pradana</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #1d1d1f;
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1d1d1f;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1d1d1f;
+      font-weight: 400;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: #007aff;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: #007aff;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.3)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient><radialGradient id="b" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.2)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="150" cy="200" r="120" fill="url(%23a)"/><circle cx="850" cy="150" r="180" fill="url(%23a)"/><circle cx="500" cy="800" r="150" fill="url(%23b)"/><circle cx="800" cy="700" r="100" fill="url(%23b)"/><circle cx="200" cy="600" r="90" fill="url(%23a)"/></svg>');
+      animation: float 20s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+      }
+      33% { 
+        transform: translateY(-30px) rotate(120deg) scale(1.1); 
+      }
+      66% { 
+        transform: translateY(-15px) rotate(240deg) scale(0.9); 
+      }
+    }
+
+    .hero-content {
+      z-index: 2;
+      position: relative;
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 30px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 1s ease-out 0.2s both;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease-out 0.4s both;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: rgba(255, 255, 255, 0.9);
+      animation: fadeInUp 1s ease-out 0.6s both;
+      margin-bottom: 40px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease-out 0.8s both;
+    }
+
+    .cta-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sections */
+    .section {
+      padding: 100px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease;
+      letter-spacing: -1px;
+    }
+
+    .section.in-view h2 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* About Section */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #666;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease 0.2s;
+    }
+
+    .section.in-view .about-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .section.in-view .skill-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section.in-view .skill-card:nth-child(1) { transition-delay: 0.1s; }
+    .section.in-view .skill-card:nth-child(2) { transition-delay: 0.2s; }
+    .section.in-view .skill-card:nth-child(3) { transition-delay: 0.3s; }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .skill-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #1d1d1f;
+      font-weight: 600;
+    }
+
+    .skill-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Experience Section */
+    .experience-timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .experience-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, #007aff, #5856d6);
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.6s ease;
+    }
+
+    .section.in-view .timeline-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .section.in-view .timeline-item:nth-child(odd) {
+      transform: translateX(0);
+    }
+
+    .section.in-view .timeline-item:nth-child(even) {
+      transform: translateX(0);
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #007aff;
+      border-radius: 50%;
+      left: -38px;
+      top: 20px;
+      border: 3px solid white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-content h3 {
+      color: #1d1d1f;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .timeline-content p {
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-item {
+      text-align: center;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .section.in-view .contact-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-item a {
+      color: #007aff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      word-break: break-all;
+      display: block;
+    }
+
+    .contact-item a:hover {
+      color: #0056b3;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #f8f9fa;
+      color: #666;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .timeline-content::before {
+        left: -25px;
+      }
+      
+      .experience-timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-item {
+        justify-content: flex-start;
+        margin-left: 40px;
+      }
+      
+      .timeline-content {
+        max-width: none;
+      }
+    }
+
+    /* Smooth scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.8);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="logo">Didik Wahyu</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <img src="img/profil.png" alt="Didik Wahyu Pradana" class="profile-img">
+      <h1>Didik Wahyu Pradana</h1>
+      <p>IT Support • Front Office • Tech Enthusiast</p>
+      <a href="#about" class="cta-button">Explore My Portfolio</a>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14"></path>
+        <path d="M19 12l-7 7-7-7"></path>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <p>A passionate graduate of SMK N 1 Purwosari, Computer and Informatics Engineering (2019–2022) with deep enthusiasm for technology and hospitality industries. Experienced in hotel systems, device troubleshooting, and equipped with excellent communication skills and teamwork abilities. Ready to contribute maximally while continuously learning and embracing new challenges.</p>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <h2>Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>🎨 Design & Editing</h3>
+        <p>Photoshop, Canva, CapCut for creating engaging and professional visual content</p>
+      </div>
+      <div class="skill-card">
+        <h3>💻 Technology & IT</h3>
+        <p>OS Installation, Windows & Linux troubleshooting, sound system setup, basic website coding</p>
+      </div>
+      <div class="skill-card">
+        <h3>🏢 Systems & Administration</h3>
+        <p>MS Office, Spreadsheet, Hotel systems (Hotelmu, BNL, DSI, Bobo.id)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <h2>Professional Journey</h2>
+    <div class="experience-timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>IT Support Intern</h3>
+          <p><strong>CV Watulintang</strong></p>
+          <p>6 months</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Receptionist</h3>
+          <p><strong>D'Paragon</strong></p>
+          <p>August 2022 – March 2023</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Technical Support</h3>
+          <p><strong>Pixelkomp</strong></p>
+          <p>April – June 2023</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Front Office</h3>
+          <p><strong>Rosalyne Sleepbox</strong></p>
+          <p>July – November 2023</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Front Office</h3>
+          <p><strong>Ceria Hotel Alun-Alun</strong></p>
+          <p>December 2023 – March 2024</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Front Office</h3>
+          <p><strong>Tujuan Jogja Villas</strong></p>
+          <p>April 2024 – June 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Let's Connect</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h4>📧 Email</h4>
+        <a href="mailto:didikwahyupradana@gmail.com">didikwahyupradana@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <h4>📱 Phone</h4>
+        <p>+62 895 0874 8916</p>
+      </div>
+      <div class="contact-item">
+        <h4>📷 Instagram</h4>
+        <a href="https://instagram.com/al3rxsa" target="_blank">@al3rxsa</a>
+      </div>
+      <div class="contact-item">
+        <h4>💼 LinkedIn</h4>
+        <a href="https://www.linkedin.com/in/didik-wahyu-pradana-776a5a325" target="_blank">LinkedIn Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Didik Wahyu Pradana. Crafted with passion.</p>
+  </footer>
+
+  <script>
+    // Smooth scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Navbar background change on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+      } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.8)';
+      }
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
